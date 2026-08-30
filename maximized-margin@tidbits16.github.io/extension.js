@@ -4,6 +4,7 @@ import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 import {GapManager} from './gapManager.js';
+import {RoundedCornersBridge} from './roundedCornersBridge.js';
 
 const DTP_SCHEMA = 'org.gnome.shell.extensions.dash-to-panel';
 
@@ -11,39 +12,44 @@ export default class MaximizedMarginExtension extends Extension {
     enable() {
         this._settings = this.getSettings();
         this._gapManager = new GapManager(this._settings);
-        this._rebuildTimeoutId = 0;
+        this._roundedCorners = new RoundedCornersBridge(this._settings);
+        this._rebuildTimeoutIds = [];
 
         this._settings.connectObject(
-            'changed', () => this._queueRebuild(),
+            'changed::gap-size', () => this._queueRebuild(50, true),
+            'changed::skip-panel-edges', () => this._queueRebuild(50, true),
+            'changed::rounded-corners-when-maximized', () => this._roundedCorners?.sync(),
             this
         );
         Main.layoutManager.connectObject(
-            'monitors-changed', () => this._queueRebuild(),
+            'monitors-changed', () => this._queueRebuild(200, true),
             this
         );
 
-        // When intellihide turns on, DTP drops its panel strut and the panel
-        // edge becomes a free edge — rebuild so the gap wraps all the way around.
         this._dtpSettings = this._tryGetDtpSettings();
         this._dtpSettings?.connectObject(
-            'changed::intellihide', () => this._queueRebuild(300),
-            'changed::intellihide-only-secondary', () => this._queueRebuild(300),
+            'changed::intellihide', () => this._queueRebuild(300, true),
+            'changed::intellihide-only-secondary', () => this._queueRebuild(300, true),
+            'changed::panel-positions', () => this._queueRebuild(300, true),
             this
         );
 
-        this._queueRebuild(500);
+        this._roundedCorners.enable();
+
         this._gapManager.rebuild();
+        this._queueRebuild(300, false);
+        this._queueRebuild(1200, false);
     }
 
     disable() {
-        if (this._rebuildTimeoutId) {
-            GLib.source_remove(this._rebuildTimeoutId);
-            this._rebuildTimeoutId = 0;
-        }
+        this._clearRebuildTimeouts();
 
         this._settings?.disconnectObject(this);
         this._dtpSettings?.disconnectObject(this);
         Main.layoutManager.disconnectObject(this);
+
+        this._roundedCorners?.disable();
+        this._roundedCorners = null;
 
         this._gapManager?.destroy();
         this._gapManager = null;
@@ -58,14 +64,21 @@ export default class MaximizedMarginExtension extends Extension {
         return new Gio.Settings({settings_schema: schema});
     }
 
-    _queueRebuild(delayMs = 50) {
-        if (this._rebuildTimeoutId)
-            GLib.source_remove(this._rebuildTimeoutId);
+    _clearRebuildTimeouts() {
+        for (const id of this._rebuildTimeoutIds)
+            GLib.source_remove(id);
+        this._rebuildTimeoutIds = [];
+    }
 
-        this._rebuildTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, delayMs, () => {
-            this._rebuildTimeoutId = 0;
+    _queueRebuild(delayMs = 50, coalesce = true) {
+        if (coalesce)
+            this._clearRebuildTimeouts();
+
+        const id = GLib.timeout_add(GLib.PRIORITY_DEFAULT, delayMs, () => {
+            this._rebuildTimeoutIds = this._rebuildTimeoutIds.filter(x => x !== id);
             this._gapManager?.rebuild();
             return GLib.SOURCE_REMOVE;
         });
+        this._rebuildTimeoutIds.push(id);
     }
 }

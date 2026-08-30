@@ -2,7 +2,7 @@
 
 Adds a tasteful touch of margin to maximized windows so the desktop is always slightly visible.
 
-Also works with [Dash to Panel](https://github.com/home-sweet-gnome/dash-to-panel). With intellihide on, the margin wraps all four edges; with a always-visible panel, that edge is left to Dash to Panel. True fullscreen (F11) goes edge-to-edge.
+Also works with [Dash to Panel](https://github.com/home-sweet-gnome/dash-to-panel).
 
 ## Install (from source)
 

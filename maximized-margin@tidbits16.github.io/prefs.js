@@ -5,6 +5,9 @@ import Gtk from 'gi://Gtk';
 import {ExtensionPreferences, gettext as _} from
     'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+const DASH_TO_PANEL_URL = 'https://extensions.gnome.org/extension/1160/dash-to-panel/';
+const ROUNDED_CORNERS_URL = 'https://extensions.gnome.org/extension/7048/rounded-window-corners-reborn/';
+
 export default class MaximizedMarginPreferences extends ExtensionPreferences {
     fillPreferencesWindow(window) {
         const settings = this.getSettings();
@@ -15,11 +18,11 @@ export default class MaximizedMarginPreferences extends ExtensionPreferences {
         });
         window.add(page);
 
-        const group = new Adw.PreferencesGroup({
+        const marginGroup = new Adw.PreferencesGroup({
             title: _('Margin'),
-            description: _('Maximize and tile keep the margin; F11 fullscreen goes edge-to-edge.'),
+            description: _('Spacing between maximized windows and the screen edges.'),
         });
-        page.add(group);
+        page.add(marginGroup);
 
         const gapRow = new Adw.SpinRow({
             title: _('Gap size'),
@@ -32,18 +35,41 @@ export default class MaximizedMarginPreferences extends ExtensionPreferences {
             }),
         });
         settings.bind('gap-size', gapRow, 'value', Gio.SettingsBindFlags.DEFAULT);
-        group.add(gapRow);
+        marginGroup.add(gapRow);
 
-        const skipRow = new Adw.SwitchRow({
-            title: _('Skip panel edges'),
-            subtitle: _('Leave Dash to Panel / top bar edges alone so gaps do not stack'),
+        const compatGroup = new Adw.PreferencesGroup({
+            title: _('Compatibility'),
+            description: _(
+                'Optional integrations with other extensions.\n' +
+                `<a href="${DASH_TO_PANEL_URL}">Dash to Panel</a>` +
+                ' · ' +
+                `<a href="${ROUNDED_CORNERS_URL}">Rounded Window Corners Reborn</a>`
+            ),
+        });
+        page.add(compatGroup);
+
+        const dtpRow = new Adw.SwitchRow({
+            title: _('Dash to Panel'),
+            subtitle: _('Skip panel edges so margins do not stack with Dash to Panel margins'),
         });
         settings.bind(
             'skip-panel-edges',
-            skipRow,
+            dtpRow,
             'active',
             Gio.SettingsBindFlags.DEFAULT
         );
-        group.add(skipRow);
+        compatGroup.add(dtpRow);
+
+        const rwcRow = new Adw.SwitchRow({
+            title: _('Rounded Window Corners Reborn'),
+            subtitle: _('Keep rounded corners on maximized windows'),
+        });
+        settings.bind(
+            'rounded-corners-when-maximized',
+            rwcRow,
+            'active',
+            Gio.SettingsBindFlags.DEFAULT
+        );
+        compatGroup.add(rwcRow);
     }
 }
