@@ -1,16 +1,19 @@
+<div align="center">
+
 # Maximized Margin
 
 Adds a tasteful touch of margin to maximized windows so the desktop is always slightly visible.
 
-Recommended to get [Rounded Window Corners Reborn](https://github.com/flexagoon/rounded-window-corners)
+<img src="example.jpg" alt="Maximized Margin example" width="720">
 
-Also works with [Dash to Panel](https://github.com/home-sweet-gnome/dash-to-panel).
+Recommended with [Rounded Window Corners Reborn](https://extensions.gnome.org/extension/7048/rounded-window-corners-reborn/).  
+Also works with [Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/).
 
 ## Install
 
-...gnome extonsion link coming soon!
+GNOME Extensions link coming soon.
 
-## Install (from source)
+## Install from source
 
 ```bash
 ./install.sh
@@ -18,3 +21,5 @@ gnome-extensions enable maximized-margin@tidbits16.github.io
 ```
 
 On Wayland, you may need to log out/in once after the first install.
+
+</div>
