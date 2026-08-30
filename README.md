@@ -6,8 +6,9 @@ Adds a tasteful touch of margin to maximized windows so the desktop is always sl
 
 <img src="example.jpg" alt="Maximized Margin example" width="720">
 
-Recommended with [Rounded Window Corners Reborn](https://extensions.gnome.org/extension/7048/rounded-window-corners-reborn/).  
-Also works with [Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/).
+Recommended with [Rounded Window Corners Reborn](https://extensions.gnome.org/extension/7048/rounded-window-corners-reborn/).
+<br>
+<em>(Also works great with [Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/)!)</em>
 
 ## Install
 
