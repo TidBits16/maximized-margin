@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.maximized-gap"
+          path="/org/gnome/shell/extensions/maximized-gap/">
+    <key name="gap-size" type="i">
+      <default>12</default>
+      <range min="0" max="200"/>
+      <summary>Gap size</summary>
+      <description>Margin in pixels around maximized windows on edges without a panel.</description>
+    </key>
+    <key name="skip-panel-edges" type="b">
+      <default>true</default>
+      <summary>Skip panel edges</summary>
+      <description>Do not add a gap on edges that already have a reserved panel/work-area inset (Dash to Panel, top bar, etc.).</description>
+    </key>
+  </schema>
+</schemalist>
