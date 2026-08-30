@@ -12,7 +12,7 @@ Recommended [Rounded Window Corners Reborn](https://extensions.gnome.org/extensi
 
 ## Install
 
-gnome extensions link coming soon...
+[Get it from GNOME Extensions](https://extensions.gnome.org/extension/10800/maximized-margin/?c=174773)
 
 ## Install from source
 
