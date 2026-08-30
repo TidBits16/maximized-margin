@@ -2,6 +2,8 @@
 
 Adds a tasteful touch of margin to maximized windows so the desktop is always slightly visible.
 
+Recommended to get [Rounded Window Corners Reborn](https://github.com/flexagoon/rounded-window-corners)
+
 Also works with [Dash to Panel](https://github.com/home-sweet-gnome/dash-to-panel).
 
 ## Install

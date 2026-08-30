@@ -40,17 +40,16 @@ export default class MaximizedMarginPreferences extends ExtensionPreferences {
         const compatGroup = new Adw.PreferencesGroup({
             title: _('Compatibility'),
             description: _(
-                'Optional integrations with other extensions.\n' +
-                `<a href="${DASH_TO_PANEL_URL}">Dash to Panel</a>` +
-                ' · ' +
-                `<a href="${ROUNDED_CORNERS_URL}">Rounded Window Corners Reborn</a>`
+                'Works great with ' +
+                `<a href="${ROUNDED_CORNERS_URL}">Rounded Window Corners Reborn</a>.\n` +
+                `<a href="${DASH_TO_PANEL_URL}">Dash to Panel</a>`
             ),
         });
         page.add(compatGroup);
 
         const dtpRow = new Adw.SwitchRow({
             title: _('Dash to Panel'),
-            subtitle: _('Skip panel edges so margins do not stack with Dash to Panel margins'),
+            subtitle: _('Skip panel edges so margins do not stack with the floating panel'),
         });
         settings.bind(
             'skip-panel-edges',
@@ -59,17 +58,5 @@ export default class MaximizedMarginPreferences extends ExtensionPreferences {
             Gio.SettingsBindFlags.DEFAULT
         );
         compatGroup.add(dtpRow);
-
-        const rwcRow = new Adw.SwitchRow({
-            title: _('Rounded Window Corners Reborn'),
-            subtitle: _('Keep rounded corners on maximized windows'),
-        });
-        settings.bind(
-            'rounded-corners-when-maximized',
-            rwcRow,
-            'active',
-            Gio.SettingsBindFlags.DEFAULT
-        );
-        compatGroup.add(rwcRow);
     }
 }

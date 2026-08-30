@@ -4,7 +4,6 @@ import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 import {GapManager} from './gapManager.js';
-import {RoundedCornersBridge} from './roundedCornersBridge.js';
 
 const DTP_SCHEMA = 'org.gnome.shell.extensions.dash-to-panel';
 
@@ -12,13 +11,11 @@ export default class MaximizedMarginExtension extends Extension {
     enable() {
         this._settings = this.getSettings();
         this._gapManager = new GapManager(this._settings);
-        this._roundedCorners = new RoundedCornersBridge(this._settings);
         this._rebuildTimeoutIds = [];
 
         this._settings.connectObject(
             'changed::gap-size', () => this._queueRebuild(50, true),
             'changed::skip-panel-edges', () => this._queueRebuild(50, true),
-            'changed::rounded-corners-when-maximized', () => this._roundedCorners?.sync(),
             this
         );
         Main.layoutManager.connectObject(
@@ -34,8 +31,6 @@ export default class MaximizedMarginExtension extends Extension {
             this
         );
 
-        this._roundedCorners.enable();
-
         this._gapManager.rebuild();
         this._queueRebuild(300, false);
         this._queueRebuild(1200, false);
@@ -47,9 +42,6 @@ export default class MaximizedMarginExtension extends Extension {
         this._settings?.disconnectObject(this);
         this._dtpSettings?.disconnectObject(this);
         Main.layoutManager.disconnectObject(this);
-
-        this._roundedCorners?.disable();
-        this._roundedCorners = null;
 
         this._gapManager?.destroy();
         this._gapManager = null;

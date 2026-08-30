@@ -13,10 +13,5 @@
       <summary>Skip panel edges</summary>
       <description>Do not add a gap on edges that already have a reserved panel/work-area inset (Dash to Panel, top bar, etc.).</description>
     </key>
-    <key name="rounded-corners-when-maximized" type="b">
-      <default>true</default>
-      <summary>Rounded corners when maximized</summary>
-      <description>When Rounded Window Corners is installed, keep rounded corners on maximized windows so they match the inset margin.</description>
-    </key>
   </schema>
 </schemalist>

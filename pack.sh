@@ -13,7 +13,6 @@ gnome-extensions pack "$SRC" \
   --force \
   --out-dir="$OUT" \
   --extra-source=gapManager.js \
-  --extra-source=roundedCornersBridge.js \
   --extra-source=LICENSE
 
 echo "Created $OUT/$UUID.shell-extension.zip"
