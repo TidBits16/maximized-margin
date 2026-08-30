@@ -15,12 +15,12 @@ Recommended with [Rounded Window Corners Reborn](https://extensions.gnome.org/ex
 GNOME Extensions link coming soon.
 
 ## Install from source
-
+</div>
 ```bash
 ./install.sh
 gnome-extensions enable maximized-margin@tidbits16.github.io
 ```
-
+<div align="center">
 On Wayland, you may need to log out/in once after the first install.
-
 </div>
+
