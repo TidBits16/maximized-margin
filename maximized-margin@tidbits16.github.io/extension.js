@@ -7,7 +7,7 @@ import {GapManager} from './gapManager.js';
 
 const DTP_SCHEMA = 'org.gnome.shell.extensions.dash-to-panel';
 
-export default class MaximizedGapExtension extends Extension {
+export default class MaximizedMarginExtension extends Extension {
     enable() {
         this._settings = this.getSettings();
         this._gapManager = new GapManager(this._settings);

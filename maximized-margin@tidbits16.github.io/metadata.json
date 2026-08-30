@@ -1,8 +1,8 @@
 {
-  "uuid": "maximized-gap@local",
+  "uuid": "maximized-margin@tidbits16.github.io",
   "name": "Maximized Margin",
   "description": "Adds a tasteful touch of margin to maximized windows so the desktop is always slightly visible.",
   "shell-version": ["50"],
-  "settings-schema": "org.gnome.shell.extensions.maximized-gap",
+  "settings-schema": "org.gnome.shell.extensions.maximized-margin",
   "url": "https://github.com/TidBits16/maximized-margin"
 }

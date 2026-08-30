@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-  <schema id="org.gnome.shell.extensions.maximized-gap"
-          path="/org/gnome/shell/extensions/maximized-gap/">
+  <schema id="org.gnome.shell.extensions.maximized-margin"
+          path="/org/gnome/shell/extensions/maximized-margin/">
     <key name="gap-size" type="i">
       <default>12</default>
       <range min="0" max="200"/>
