@@ -13,6 +13,7 @@ gnome-extensions pack "$SRC" \
   --force \
   --out-dir="$OUT" \
   --extra-source=gapManager.js \
+  --extra-source=peekBlurManager.js \
   --extra-source=LICENSE
 
 echo "Created $OUT/$UUID.shell-extension.zip"
