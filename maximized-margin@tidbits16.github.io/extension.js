@@ -4,6 +4,7 @@ import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 import {GapManager} from './gapManager.js';
+import {PeekBlurManager} from './peekBlurManager.js';
 
 const DTP_SCHEMA = 'org.gnome.shell.extensions.dash-to-panel';
 
@@ -11,11 +12,14 @@ export default class MaximizedMarginExtension extends Extension {
     enable() {
         this._settings = this.getSettings();
         this._gapManager = new GapManager(this._settings);
+        this._peekBlurManager = new PeekBlurManager(this._settings);
         this._rebuildTimeoutIds = [];
 
         this._settings.connectObject(
             'changed::gap-size', () => this._queueRebuild(50, true),
             'changed::skip-panel-edges', () => this._queueRebuild(50, true),
+            'changed::peek-blur', () => this._queueRebuild(50, true),
+            'changed::peek-blur-radius', () => this._peekBlurManager?.updateRadius(),
             this
         );
         Main.layoutManager.connectObject(
@@ -31,7 +35,7 @@ export default class MaximizedMarginExtension extends Extension {
             this
         );
 
-        this._gapManager.rebuild();
+        this._rebuild();
         this._queueRebuild(300, false);
         this._queueRebuild(1200, false);
     }
@@ -43,10 +47,17 @@ export default class MaximizedMarginExtension extends Extension {
         this._dtpSettings?.disconnectObject(this);
         Main.layoutManager.disconnectObject(this);
 
+        this._peekBlurManager?.destroy();
+        this._peekBlurManager = null;
         this._gapManager?.destroy();
         this._gapManager = null;
         this._settings = null;
         this._dtpSettings = null;
+    }
+
+    _rebuild() {
+        this._gapManager?.rebuild();
+        this._peekBlurManager?.rebuild();
     }
 
     _tryGetDtpSettings() {
@@ -68,7 +79,7 @@ export default class MaximizedMarginExtension extends Extension {
 
         const id = GLib.timeout_add(GLib.PRIORITY_DEFAULT, delayMs, () => {
             this._rebuildTimeoutIds = this._rebuildTimeoutIds.filter(x => x !== id);
-            this._gapManager?.rebuild();
+            this._rebuild();
             return GLib.SOURCE_REMOVE;
         });
         this._rebuildTimeoutIds.push(id);

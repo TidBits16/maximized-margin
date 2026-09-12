@@ -37,6 +37,41 @@ export default class MaximizedMarginPreferences extends ExtensionPreferences {
         settings.bind('gap-size', gapRow, 'value', Gio.SettingsBindFlags.DEFAULT);
         marginGroup.add(gapRow);
 
+        const blurGroup = new Adw.PreferencesGroup({
+            title: _('Peek blur'),
+            description: _(
+                'Experimental: blurs the wallpaper in the margin around maximized windows. ' +
+                'Uses its own wallpaper clone and will not modify Blur My Shell.'
+            ),
+        });
+        page.add(blurGroup);
+
+        const blurRow = new Adw.SwitchRow({
+            title: _('Blur peek margin'),
+            subtitle: _('Experimental — only while a window is maximized'),
+        });
+        settings.bind('peek-blur', blurRow, 'active', Gio.SettingsBindFlags.DEFAULT);
+        blurGroup.add(blurRow);
+
+        const radiusRow = new Adw.SpinRow({
+            title: _('Blur radius'),
+            subtitle: _('Larger radii look softer and tend to be cheaper to render'),
+            adjustment: new Gtk.Adjustment({
+                lower: 0,
+                upper: 100,
+                step_increment: 1,
+                page_increment: 5,
+            }),
+        });
+        settings.bind('peek-blur-radius', radiusRow, 'value', Gio.SettingsBindFlags.DEFAULT);
+        settings.bind(
+            'peek-blur',
+            radiusRow,
+            'sensitive',
+            Gio.SettingsBindFlags.GET
+        );
+        blurGroup.add(radiusRow);
+
         const compatGroup = new Adw.PreferencesGroup({
             title: _('Compatibility'),
             description: _(

@@ -53,6 +53,23 @@ export class GapManager {
         this._relayoutMaximizedWindows();
     }
 
+    /**
+     * Current per-edge gap sizes for a monitor (same math as strut rebuild).
+     * Used by peek blur so both stay aligned.
+     */
+    marginsForMonitor(index) {
+        const gap = this._settings.get_int('gap-size');
+        if (gap <= 0)
+            return {top: 0, bottom: 0, left: 0, right: 0};
+
+        const monitor = Main.layoutManager.monitors[index];
+        if (!monitor)
+            return {top: 0, bottom: 0, left: 0, right: 0};
+
+        const skipPanel = this._settings.get_boolean('skip-panel-edges');
+        return this._marginsForMonitor(monitor, index, gap, skipPanel);
+    }
+
     destroy() {
         this._destroyActors();
         this._flushStruts();

@@ -13,5 +13,16 @@
       <summary>Skip panel edges</summary>
       <description>Do not add a gap on edges that already have a reserved panel/work-area inset (Dash to Panel, top bar, etc.).</description>
     </key>
+    <key name="peek-blur" type="b">
+      <default>false</default>
+      <summary>Blur peek margin (experimental)</summary>
+      <description>Experimental: blur the desktop wallpaper in the margin around maximized windows. Uses a separate wallpaper clone and does not modify Blur My Shell.</description>
+    </key>
+    <key name="peek-blur-radius" type="i">
+      <default>36</default>
+      <range min="0" max="100"/>
+      <summary>Peek blur radius</summary>
+      <description>Gaussian blur radius for the peek margin. Larger values are cheaper thanks to downscaling.</description>
+    </key>
   </schema>
 </schemalist>
