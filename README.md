@@ -4,9 +4,9 @@
 
 [Get Maximized Margin from GNOME Extensions](https://extensions.gnome.org/extension/10800/maximized-margin/?c=174773)
 
-# Maximized Margin
-
 <img src="icon.svg" alt="Maximized Margin icon" width="128">
+
+# Maximized Margin
 
 Adds a tasteful touch of margin to maximized windows so the desktop is always slightly visible.
 
