@@ -1,5 +1,9 @@
 <div align="center">
 
+## Install
+
+[Get Maximized Margin from GNOME Extensions](https://extensions.gnome.org/extension/10800/maximized-margin/?c=174773)
+
 # Maximized Margin
 
 Adds a tasteful touch of margin to maximized windows so the desktop is always slightly visible.
@@ -14,11 +18,7 @@ Also includes a smexy blur effect!
 
 <img src="smexy_blur.jpg" alt="Maximized Margin blur example" width="720">
 
-(I wouldn't trust this guy - he codes in light mode and talks to himself)
-
-## Install
-
-[Get it from GNOME Extensions](https://extensions.gnome.org/extension/10800/maximized-margin/?c=174773)
+Look at that blur!
 
 ## Install from source
 
