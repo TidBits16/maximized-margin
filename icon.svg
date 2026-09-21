@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5a9ea8"/>
+      <stop offset="55%" stop-color="#4a8f9a"/>
+      <stop offset="100%" stop-color="#3d7f8a"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-10%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+    <clipPath id="squircle">
+      <rect x="4" y="4" width="120" height="120" rx="28" ry="28"/>
+    </clipPath>
+  </defs>
+
+  <!-- Squircle background (desktop peek) -->
+  <rect x="4" y="4" width="120" height="120" rx="28" ry="28" fill="url(#bg)"/>
+  <g clip-path="url(#squircle)" opacity="0.9">
+    <path d="M4 78 C 28 62, 48 96, 72 78 C 96 60, 112 86, 124 70 L 124 124 L 4 124 Z" fill="url(#wave)"/>
+    <path d="M4 54 C 30 40, 46 68, 70 52 C 94 36, 110 58, 124 46 L 124 78 C 108 90, 92 68, 70 82 C 48 96, 28 72, 4 86 Z" fill="#ffffff" opacity="0.08"/>
+  </g>
+
+  <!-- Maximized window with visible margin -->
+  <g filter="url(#shadow)">
+    <rect x="28" y="24" width="72" height="80" rx="10" ry="10" fill="#f6f5f2"/>
+    <path d="M28 34 a10 10 0 0 1 10-10 h52 a10 10 0 0 1 10 10 v6 H28 Z" fill="#2e3436"/>
+    <circle cx="36" cy="32" r="2.2" fill="#e35d4a"/>
+    <circle cx="43" cy="32" r="2.2" fill="#e6b450"/>
+    <circle cx="50" cy="32" r="2.2" fill="#5cb87a"/>
+  </g>
+
+  <!-- Maximize badge at top-right -->
+  <g filter="url(#shadow)">
+    <rect x="82" y="0" width="46" height="46" rx="14" ry="14" fill="#2e3436"/>
+    <g fill="none" stroke="#f6f5f2" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M109 19 L119 9"/>
+      <path d="M110 9 L119 9 L119 18"/>
+      <path d="M101 27 L91 37"/>
+      <path d="M91 28 L91 37 L100 37"/>
+    </g>
+  </g>
+</svg>

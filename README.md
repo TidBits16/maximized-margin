@@ -6,6 +6,8 @@
 
 # Maximized Margin
 
+<img src="icon.svg" alt="Maximized Margin icon" width="128">
+
 Adds a tasteful touch of margin to maximized windows so the desktop is always slightly visible.
 
 <img src="example.jpg" alt="Maximized Margin example" width="720">
