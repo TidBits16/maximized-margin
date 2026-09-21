@@ -6,13 +6,6 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 /**
  * Full-monitor wallpaper blur under maximized windows.
- *
- * Lives in _backgroundGroup (always behind Meta.WindowActors and behind
- * transparent panels like Dash to Panel). That way blur shows in:
- *   - the maximize peek margin
- *   - rounded-corner cutouts (Rounded Window Corners)
- *   - through translucent panel chrome
- *
  */
 export class PeekBlurManager {
     constructor(settings) {
@@ -39,13 +32,7 @@ export class PeekBlurManager {
     rebuild() {
         this._destroyLayers();
 
-        if (!this._settings.get_boolean('peek-blur'))
-            return;
-        if (this._settings.get_int('gap-size') <= 0)
-            return;
-
-        const radius = this._settings.get_int('peek-blur-radius');
-        if (radius <= 0)
+        if (!this._peekActive())
             return;
 
         const bgGroup = Main.layoutManager._backgroundGroup;
@@ -63,11 +50,7 @@ export class PeekBlurManager {
 
     updateRadius() {
         const radius = this._settings.get_int('peek-blur-radius');
-        const enabled = this._settings.get_boolean('peek-blur') &&
-            this._settings.get_int('gap-size') > 0 &&
-            radius > 0;
-
-        if (!enabled || this._layers.length === 0) {
+        if (!this._peekActive() || this._layers.length === 0) {
             this.rebuild();
             return;
         }
@@ -98,6 +81,25 @@ export class PeekBlurManager {
         this._windowSignals.clear();
 
         this._settings = null;
+    }
+
+    _peekActive() {
+        if (!this._settings.get_boolean('peek-blur'))
+            return false;
+        if (this._settings.get_int('peek-blur-radius') <= 0)
+            return false;
+        return this._hasConfiguredMargin();
+    }
+
+    _hasConfiguredMargin() {
+        if (this._settings.get_boolean('use-custom-margins')) {
+            return this._settings.get_int('custom-margin-top') > 0 ||
+                this._settings.get_int('custom-margin-bottom') > 0 ||
+                this._settings.get_int('custom-margin-left') > 0 ||
+                this._settings.get_int('custom-margin-right') > 0;
+        }
+
+        return this._settings.get_int('gap-size') > 0;
     }
 
     _createLayer(monitorIndex) {

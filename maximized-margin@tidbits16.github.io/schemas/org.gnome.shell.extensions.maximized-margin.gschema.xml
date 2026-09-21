@@ -8,10 +8,50 @@
       <summary>Gap size</summary>
       <description>Margin in pixels around maximized windows on edges without a panel.</description>
     </key>
+    <key name="use-custom-margins" type="b">
+      <default>false</default>
+      <summary>Use custom margins</summary>
+      <description>Set each screen edge separately instead of one gap size.</description>
+    </key>
+    <key name="custom-margin-top" type="i">
+      <default>12</default>
+      <range min="0" max="400"/>
+      <summary>Top margin</summary>
+      <description>Pixels between a top panel and the window. With no panel, pixels from the top of the screen.</description>
+    </key>
+    <key name="custom-margin-bottom" type="i">
+      <default>12</default>
+      <range min="0" max="400"/>
+      <summary>Bottom margin</summary>
+      <description>Pixels between a bottom panel and the window. With no panel, pixels from the bottom of the screen.</description>
+    </key>
+    <key name="custom-margin-left" type="i">
+      <default>12</default>
+      <range min="0" max="400"/>
+      <summary>Left margin</summary>
+      <description>Pixels between a left panel and the window. With no panel, pixels from the left of the screen.</description>
+    </key>
+    <key name="custom-margin-right" type="i">
+      <default>12</default>
+      <range min="0" max="400"/>
+      <summary>Right margin</summary>
+      <description>Pixels between a right panel and the window. With no panel, pixels from the right of the screen.</description>
+    </key>
     <key name="skip-panel-edges" type="b">
       <default>true</default>
       <summary>Skip panel edges</summary>
       <description>Do not add a gap on edges that already have a reserved panel/work-area inset (Dash to Panel, top bar, etc.).</description>
+    </key>
+    <key name="tiling-shell" type="b">
+      <default>false</default>
+      <summary>Tiling Shell</summary>
+      <description>Apply a margin between tiled windows through Tiling Shell's inner gaps.</description>
+    </key>
+    <key name="tiling-shell-gap" type="i">
+      <default>12</default>
+      <range min="0" max="200"/>
+      <summary>Between windows</summary>
+      <description>Margin in pixels between tiled windows when Tiling Shell compatibility is enabled.</description>
     </key>
     <key name="peek-blur" type="b">
       <default>false</default>

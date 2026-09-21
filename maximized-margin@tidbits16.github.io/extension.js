@@ -17,6 +17,11 @@ export default class MaximizedMarginExtension extends Extension {
 
         this._settings.connectObject(
             'changed::gap-size', () => this._queueRebuild(50, true),
+            'changed::use-custom-margins', () => this._queueRebuild(50, true),
+            'changed::custom-margin-top', () => this._queueRebuild(50, true),
+            'changed::custom-margin-bottom', () => this._queueRebuild(50, true),
+            'changed::custom-margin-left', () => this._queueRebuild(50, true),
+            'changed::custom-margin-right', () => this._queueRebuild(50, true),
             'changed::skip-panel-edges', () => this._queueRebuild(50, true),
             'changed::peek-blur', () => this._queueRebuild(50, true),
             'changed::peek-blur-radius', () => this._peekBlurManager?.updateRadius(),
